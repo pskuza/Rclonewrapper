@@ -26,6 +26,6 @@ class RclonewrapperTests extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
 		
-        $this->assertContains('rclone', $rclone->version());
+        $this->assertRegexp('/rclone/', $rclone->version());
     }
 }
