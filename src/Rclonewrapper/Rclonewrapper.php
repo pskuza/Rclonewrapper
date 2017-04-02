@@ -61,7 +61,7 @@ class Rclonewrapper
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
 
         if ($returnValue !== 0) {
-            throw new RuntimeException(implode("\r\n", $output));
+            throw new Exception(implode("\r\n", $output));
         }
 
         return [$output, $returnValue];
