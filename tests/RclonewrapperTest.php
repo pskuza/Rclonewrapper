@@ -23,7 +23,7 @@ class RclonewrapperTests extends \PHPUnit_Framework_TestCase
      */
     public function testVersion()
     {
-        $rclone = new Rclonewrapper('./rclone');
+        $rclone = new Rclonewrapper('rclone');
 		
         $this->assertContains('rclone', $rclone->version());
     }
