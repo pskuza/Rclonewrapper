@@ -28,4 +28,14 @@ class RclonewrapperTests extends TestCase
 		
         $this->assertRegexp('/rclone/', $rclone->version());
     }
+	
+	/**
+     * Tests if the listremotes function works
+     */
+    public function testListremotes()
+    {
+        $rclone = new Rclonewrapper('./rclone');
+		
+        $this->assertContains('DropboxTest', $rclone->listremotes());
+    }
 }
