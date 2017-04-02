@@ -9,7 +9,7 @@
 
 namespace Rclonewrapper\tests;
 
-use rclone-wrapper\Rclonewrapper;
+use Rclonewrapper\Rclonewrapper;
 
 /**
  * Rclonewrappertests.
