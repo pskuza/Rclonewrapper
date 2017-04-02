@@ -9,8 +9,6 @@
 
 namespace Rclonewrapper;
 
-use Rclonewrapper\Exception\RcloneException;
-
 class Rclonewrapper
 {
     /**
@@ -63,7 +61,7 @@ class Rclonewrapper
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
 
         if ($returnValue !== 0) {
-            throw new Exception(implode("\r\n", $output));
+            throw new \Exception(implode("\r\n", $output));
         }
 
         return [$output, $returnValue];
