@@ -31,9 +31,39 @@ class Rclonewrapper
      * @param string $rclone
      * @param string $config
      */
-    public function __construct($rclone, $config)
+    public function __construct($rclone, $config = '.rclone.conf')
     {
         $this->rclone = $rclone;
         $this->config = $config;
     }
+	
+	/**
+	 * Returns rclone version
+	 *
+     * @return string
+     */
+	public function version()
+	{
+		$version = $this->execute('version');
+		
+		return reset($version);
+	}
+	
+	/**
+     * @param string $command
+     *
+     * @return array 
+     *
+     * @throws RuntimeException
+     */
+	protected function execute($command)
+	{
+		exec($this->rclone . " --config " . $this->config . " " . $command, $output, $returnValue);
+		
+        if ($returnValue !== 0) {
+            throw new RuntimeException(implode("\r\n", $output));
+        }
+		
+		return array($output, $returnValue);
+	}
 }
