@@ -9,7 +9,7 @@
 
 namespace Rclonewrapper;
 
-use Rclonewrapper/Exception/RcloneException;
+use Rclonewrapper\Exception\RcloneException;
 
 class Rclonewrapper
 {
