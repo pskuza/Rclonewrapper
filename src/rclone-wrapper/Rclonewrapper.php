@@ -35,6 +35,5 @@ class Rclonewrapper
     {
         $this->rclone = $rclone;
         $this->config = $config;
-
     }
 }
