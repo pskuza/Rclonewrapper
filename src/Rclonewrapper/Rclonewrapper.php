@@ -9,6 +9,8 @@
 
 namespace Rclonewrapper;
 
+use Rclonewrapper/Exception/RcloneException;
+
 class Rclonewrapper
 {
     /**
