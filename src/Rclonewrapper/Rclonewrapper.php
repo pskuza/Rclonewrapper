@@ -36,7 +36,7 @@ class Rclonewrapper
         $this->rclone = $rclone;
         $this->config = $config;
     }
-	
+
 	/**
      * Lists all remotes in the config.
      *
