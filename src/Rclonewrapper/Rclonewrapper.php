@@ -31,7 +31,7 @@ class Rclonewrapper
      * @param string $rclone
      * @param string $config
      */
-    public function __construct($rclone, $config = '.rclone.conf')
+    public function __construct($rclone, $config = 'rclone.conf')
     {
         $this->rclone = $rclone;
         $this->config = $config;
@@ -45,7 +45,7 @@ class Rclonewrapper
     public function version()
     {
         $version = $this->execute('version');
-		var_dump($version);
+		var_dump(reset($version));
         return reset($version);
     }
 
