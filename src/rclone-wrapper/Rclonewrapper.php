@@ -36,34 +36,34 @@ class Rclonewrapper
         $this->rclone = $rclone;
         $this->config = $config;
     }
-	
-	/**
-	 * Returns rclone version
-	 *
+
+    /**
+     * Returns rclone version.
+     *
      * @return string
      */
-	public function version()
-	{
-		$version = $this->execute('version');
-		
-		return reset($version);
-	}
-	
-	/**
+    public function version()
+    {
+        $version = $this->execute('version');
+
+        return reset($version);
+    }
+
+    /**
      * @param string $command
      *
-     * @return array 
-     *
      * @throws RuntimeException
+     *
+     * @return array
      */
-	protected function execute($command)
-	{
-		exec($this->rclone . " --config " . $this->config . " " . $command, $output, $returnValue);
-		
+    protected function execute($command)
+    {
+        exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
+
         if ($returnValue !== 0) {
             throw new RuntimeException(implode("\r\n", $output));
         }
-		
-		return array($output, $returnValue);
-	}
+
+        return [$output, $returnValue];
+    }
 }
