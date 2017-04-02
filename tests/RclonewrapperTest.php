@@ -10,13 +10,14 @@
 namespace Rclonewrapper\tests;
 
 use Rclonewrapper\Rclonewrapper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Rclonewrappertests.
  *
  * Tests all functionality in the Rclonewrapper package.
  */
-class RclonewrapperTests extends \PHPUnit_Framework_TestCase
+class RclonewrapperTests extends TestCase
 {
     /**
      * Tests if the version function works
