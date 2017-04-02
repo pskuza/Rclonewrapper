@@ -1,0 +1,18 @@
+language: php
+php:
+    - 5.4
+    - 5.5
+    - 5.6
+    - 7.0
+    - 7.1
+before_install:
+    wget https://downloads.rclone.org/rclone-current-linux-amd64.zip
+    unzip rclone-current-linux-amd64.zip
+    ls -lR
+install:
+    - composer install
+before_script:
+    - curl http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer.phar
+script:
+    - php php-cs-fixer.phar fix -v --dry-run --diff src
+    - "./vendor/bin/phpunit"
