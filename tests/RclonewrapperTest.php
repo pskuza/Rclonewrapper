@@ -37,6 +37,7 @@ class RclonewrapperTests extends TestCase
         $rclone = new Rclonewrapper('./rclone');
 		// since assertContains does not want to work for me
 		$first_element = reset($rclone->listremotes());
-		$this->assertRegexp('/DropboxTest:/', $first_element);
+		var_dump($first_element);
+		$this->assertRegexp('/DropboxTest/', $first_element);
     }
 }
