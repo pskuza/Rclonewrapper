@@ -45,7 +45,7 @@ class Rclonewrapper
     public function version()
     {
         $version = $this->execute('version');
-        return $version[0];
+        return reset($version[0]);
     }
 
     /**
