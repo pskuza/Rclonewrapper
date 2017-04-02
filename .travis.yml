@@ -9,6 +9,7 @@ php:
 before_install:
     - wget https://downloads.rclone.org/rclone-current-linux-amd64.zip
     - unzip rclone-current-linux-amd64.zip
+    - find . -name rclone | xargs cp -t .
     - ls -lR
 install:
     - composer install
