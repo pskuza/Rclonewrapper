@@ -35,7 +35,7 @@ class RclonewrapperTests extends TestCase
     public function testListremotes()
     {
         $rclone = new Rclonewrapper('./rclone');
-
-		$this->assertContains('DropboxTest', $rclone->listremotes(), '', true);
+		var_dump($rclone->listremotes());
+		$this->assertContains('DropboxTest:', $rclone->listremotes());
     }
 }
