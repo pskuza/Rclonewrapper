@@ -55,6 +55,26 @@ var_dump($rclone->copy('some_directory_with_files', '/test'));
 // bool (true) on success, false on failure
 // https://rclone.org/commands/rclone_copy/
 
+# get object count and size of path
+var_dump($rclone->size('/'));
+// array(2) {["count"]=>int(4)["size"]=>string(9) "134217724"}
+// https://rclone.org/commands/rclone_size/
+
+# get directory and files in path
+var_dump($rclone->ls('/test'));
+// array you will see how it looks
+// https://rclone.org/commands/rclone_ls/
+
+# get directory and files in path with timestamp
+var_dump($rclone->lsl('/test'));
+// array you will see how it looks
+// https://rclone.org/commands/rclone_lsl/
+
+# get directories in path
+var_dump($rclone->lsd('/test'));
+// array you will see how it looks
+// https://rclone.org/commands/rclone_lsd/
+
 # delete a directory with files
 var_dump($rclone->purge('/test'));
 // bool (true) on success, false on failure
