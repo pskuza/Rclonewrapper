@@ -24,6 +24,13 @@ class Rclonewrapper
      * @var string
      */
     private $config;
+	
+	/**
+     * The rclone remote path.
+     *
+     * @var string
+     */
+    private $remote = NULL;
 
     /**
      * Class constructor.
@@ -35,6 +42,75 @@ class Rclonewrapper
     {
         $this->rclone = $rclone;
         $this->config = $config;
+    }
+	
+	/**
+     * Sets the remote.
+	 *
+	 * @param string $remote
+     *
+     * @return bool
+     */
+    public function setremote($remote)
+    {
+        if(!empty($remote)) {	
+			// check if this remotes exists
+			if(in_array($remote, $this->listremotes())) {
+				$this->remote = $remote;
+				return true;
+			}
+		}
+		
+        return false;
+    }
+	
+	/**
+     * Creates a dir.
+	 *
+	 * @param string $path
+     *
+     * @return bool
+     */
+    public function createdir($path)
+    {
+        $createdir = $this->execute('mkdir '.$this->remote.$path);
+
+		if(isset($createdir[1]) && !$createdir[1]) {
+			return true;
+		}
+		return false;
+    }
+	
+	/**
+     * Deletes a dir.
+	 *
+	 * @param string $path
+     *
+     * @return bool
+     */
+    public function deletedir($path)
+    {
+        $createdir = $this->execute('rmdir '.$this->remote.$path);
+
+		if(isset($createdir[1]) && !$createdir[1]) {
+			return true;
+		}
+		return false;
+    }
+	
+	/**
+     * Cleanup a remote.
+     *
+     * @return bool
+     */
+    public function cleanup()
+    {
+        $cleanup = $this->execute('cleanup '.$this->remote);
+
+		if(isset($cleanup[1]) && !$cleanup[1]) {
+			return true;
+		}
+		return false;
     }
 
     /**
@@ -72,9 +148,9 @@ class Rclonewrapper
     {
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
 
-        if ($returnValue !== 0) {
-            throw new \Exception(implode("\r\n", $output));
-        }
+        // if ($returnValue !== 0) {
+            // throw new \Exception(implode("\r\n", $output));
+        // }
 
         return [$output, $returnValue];
     }
