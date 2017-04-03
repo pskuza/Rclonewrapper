@@ -37,8 +37,8 @@ class RclonewrapperTest extends TestCase
         $rclone = new Rclonewrapper('./rclone');
         $this->assertContains('DropboxTest:', $rclone->listremotes());
     }
-	
-	/**
+
+    /**
      * Tests if setremote works.
      */
     public function testSetremote()
@@ -46,35 +46,35 @@ class RclonewrapperTest extends TestCase
         $rclone = new Rclonewrapper('./rclone');
         $this->assertTrue($rclone->setremote('DropboxTest:'));
     }
-	
-	/**
+
+    /**
      * Tests if createdir works.
      */
     public function testCreatedir()
     {
         $rclone = new Rclonewrapper('./rclone');
-		$rclone->setremote('DropboxTest:');
+        $rclone->setremote('DropboxTest:');
         $this->assertTrue($rclone->createdir('/test'));
     }
-	
-	/**
+
+    /**
      * Tests if deletedir works.
      */
     public function testDeletedir()
     {
         $rclone = new Rclonewrapper('./rclone');
-		$rclone->setremote('DropboxTest:');
+        $rclone->setremote('DropboxTest:');
         $this->assertTrue($rclone->deletedir('/test'));
     }
-	
-	/**
+
+    /**
      * Tests if cleanup.
      */
     public function testCleanup()
     {
         $rclone = new Rclonewrapper('./rclone');
-		// cleanup does not work with dropbox
-		$rclone->setremote('DropboxTest:');
+        // cleanup does not work with dropbox
+        $rclone->setremote('DropboxTest:');
         $this->assertFalse($rclone->cleanup());
     }
 }
