@@ -20,30 +20,42 @@ use Rclonewrapper\Rclonewrapper;
 // Binary and config location
 $rclone = new Rclonewrapper('./rclone', 'rclone.conf');
 
+# print rclone version
 var_dump($rclone->version());
 // string(12) "rclone v1.36"
 // https://rclone.org/commands/rclone_version/
 
+# list all available remotes
 var_dump($rclone->listremotes());
 // array(1) {[0]=>string(8) "Dropbox:"}
 // or however many are defined in the rclone.conf
 // https://rclone.org/commands/rclone_listremotes/
 
+# set which remote you want to use
 var_dump($rclone->setremote('Dropbox:'));
 // bool (true) on success, false on failure
 
+# create directory
 var_dump($rclone->mkdir('/test'));
 // bool (true) on success, false on failure
 // https://rclone.org/commands/rclone_mkdir/
 
+# delete empty directory
 var_dump($rclone->rmdir('/test'));
 // bool (true) on success, false on failure
 // https://rclone.org/commands/rclone_rmdir/
 
+# copy a file to a remote directory
 var_dump($rclone->copy('afile.dat', '/test'));
 // bool (true) on success, false on failure
 // https://rclone.org/commands/rclone_copy/
 
+# copy a whole directory to remote directory
+var_dump($rclone->copy('some_directory_with_files', '/test'));
+// bool (true) on success, false on failure
+// https://rclone.org/commands/rclone_copy/
+
+# delete a directory with files
 var_dump($rclone->purge('/test'));
 // bool (true) on success, false on failure
 // https://rclone.org/commands/rclone_purge/
