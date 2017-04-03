@@ -9,18 +9,18 @@
 
 namespace Rclonewrapper\tests;
 
-use Rclonewrapper\Rclonewrapper;
 use PHPUnit\Framework\TestCase;
+use Rclonewrapper\Rclonewrapper;
 
 /**
  * Rclonewrappertests.
  *
  * Tests all functionality in the Rclonewrapper package.
  */
-class RclonewrapperTests extends TestCase
+class RclonewrapperTest extends TestCase
 {
     /**
-     * Tests if the version function works
+     * Tests if the version function works.
      */
     public function testVersion()
     {
@@ -30,12 +30,11 @@ class RclonewrapperTests extends TestCase
     }
 	
 	/**
-     * Tests if the listremotes function works
+     * Tests if the listremotes function works.
      */
     public function testListremotes()
     {
         $rclone = new Rclonewrapper('./rclone');
-		var_dump($rclone->listremotes());
 		$this->assertContains('DropboxTest:', $rclone->listremotes());
     }
 }
