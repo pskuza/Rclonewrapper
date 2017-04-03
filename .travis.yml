@@ -13,6 +13,17 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_ff94d2327762_key -iv $encrypted_ff94d2327762_iv -in rclone.conf.enc -out rclone.conf -d
     - dd if=/dev/urandom of=testfile.dat  bs=50M  count=1
     - ls -lR
+    - mkdir testdir
+    - mkdir testdir/test1
+    - mkdir testdir/test2
+    - mkdir testdir/test3
+    - mkdir testdir/test4
+    - mkdir testdir/test5
+    - dd if=/dev/urandom of=testdir/test1/testfile.dat  bs=50M  count=1
+    - dd if=/dev/urandom of=testdir/test2/testfile.dat  bs=50M  count=1
+    - dd if=/dev/urandom of=testdir/test3/testfile.dat  bs=50M  count=1
+    - dd if=/dev/urandom of=testdir/test4/testfile.dat  bs=50M  count=1
+    - dd if=/dev/urandom of=testdir/test5/testfile.dat  bs=50M  count=1
 install:
     - composer install
 before_script:

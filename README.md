@@ -1,5 +1,5 @@
 # Rclonewrapper [![Build Status](https://travis-ci.org/Cr0nixx/Rclonewrapper.svg?branch=master)](https://travis-ci.org/Cr0nixx/Rclonewrapper)
-Simple wrapper to use rclone in your PHP projects.
+Simple wrapper to use [rclone](https://rclone.org) in your PHP projects.
 
 ## Install
 
@@ -25,7 +25,7 @@ var_dump($rclone->version());
 // https://rclone.org/commands/rclone_version/
 
 var_dump($rclone->listremotes());
-// array(1) {[0]=>string(12) "Dropbox:"}
+// array(1) {[0]=>string(8) "Dropbox:"}
 // or however many are defined in the rclone.conf
 // https://rclone.org/commands/rclone_listremotes/
 
