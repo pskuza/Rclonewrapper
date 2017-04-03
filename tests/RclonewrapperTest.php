@@ -80,8 +80,8 @@ class RclonewrapperTest extends TestCase
         $this->assertTrue($rclone->copy('testfile.dat', '/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
     }
-	
-	/**
+
+    /**
      * Tests if copy of a folder and purge works.
      */
     public function testCreatedirandCopydirandPurge()
@@ -92,8 +92,8 @@ class RclonewrapperTest extends TestCase
         $this->assertTrue($rclone->copy('testdir', '/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
     }
-	
-	/**
+
+    /**
      * Tests if ls, lsd, lsl, size.
      */
     public function testallthelsandsize()
@@ -103,10 +103,8 @@ class RclonewrapperTest extends TestCase
         // $this->assertTrue($rclone->mkdir('/'.$this->semi_random_test_name));
         // $this->assertTrue($rclone->copy('testdir', '/'.$this->semi_random_test_name));
         // $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
-		
-		// var_dump($rclone->size($this->semi_random_test_name));
-		
-		
+
+        // var_dump($rclone->size($this->semi_random_test_name));
     }
 
     /**
