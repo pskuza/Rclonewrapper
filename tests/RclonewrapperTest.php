@@ -19,16 +19,16 @@ use Rclonewrapper\Rclonewrapper;
  */
 class RclonewrapperTest extends TestCase
 {
-	private $semi_random_folder_name;
-	
-	/**
+    private $semi_random_folder_name;
+
+    /**
      * Init some semi random folders/files names.
      */
-	public function __construct()
-	{
-		$this->semi_random_test_name = "test_" . mt_rand();
-	}
-	
+    public function __construct()
+    {
+        $this->semi_random_test_name = 'test_'.mt_rand();
+    }
+
     /**
      * Tests if the version function works.
      */
@@ -55,7 +55,7 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $this->assertTrue($rclone->setremote('DropboxTest:'));
-		$this->assertFalse($rclone->setremote('Nosuchremote:'));
+        $this->assertFalse($rclone->setremote('Nosuchremote:'));
     }
 
     /**
@@ -66,19 +66,19 @@ class RclonewrapperTest extends TestCase
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
         $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
-		$this->assertTrue($rclone->deletedir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->deletedir('/'.$this->semi_random_test_name));
     }
-	
-	/**
+
+    /**
      * Tests if copy and purge works.
      */
     public function testCreatedirandCopyandPurge()
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-		$this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->copy('testfile.dat', '/'.$this->semi_random_test_name));
-		$this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
     }
 
     /**
