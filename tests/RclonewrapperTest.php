@@ -55,10 +55,11 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $this->assertTrue($rclone->setremote('DropboxTest:'));
+		$this->assertFlase($rclone->setremote('Nosuchremote:'));
     }
 
     /**
-     * Tests if createdir works.
+     * Tests if createdir and deletedir works.
      */
     public function testCreatedirandDeletedir()
     {
