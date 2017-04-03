@@ -3,7 +3,11 @@ Simple wrapper to use rclone in your PHP projects.
 
 ## Install
 
+``` sh
 php composer.phar require "cr0nixx/rclonewrapper"
+```
+
+You need a valid rclone.conf
 
 ### Basic usage and what works
 ``` php
@@ -25,7 +29,7 @@ var_dump($rclone->listremotes());
 // or however many are defined in the rclone.conf
 // https://rclone.org/commands/rclone_listremotes/
 
-$rclone->setremote('Dropbox:');
+var_dump($rclone->setremote('Dropbox:'));
 // bool (true) on success, false on failure
 
 var_dump($rclone->mkdir('/test'));
