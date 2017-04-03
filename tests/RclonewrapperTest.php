@@ -59,14 +59,14 @@ class RclonewrapperTest extends TestCase
     }
 
     /**
-     * Tests if createdir and deletedir works.
+     * Tests if mkdir and rmdir works.
      */
     public function testCreatedirandDeletedir()
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
-        $this->assertTrue($rclone->deletedir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->mkdir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->rmdir('/'.$this->semi_random_test_name));
     }
 
     /**
@@ -76,7 +76,7 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->mkdir('/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->copy('testfile.dat', '/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
     }

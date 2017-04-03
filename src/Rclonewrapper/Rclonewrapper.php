@@ -72,7 +72,7 @@ class Rclonewrapper
      *
      * @return bool
      */
-    public function createdir($path)
+    public function mkdir($path)
     {
         $createdir = $this->execute('mkdir '.$this->remote.$path);
 
@@ -127,7 +127,7 @@ class Rclonewrapper
      *
      * @return bool
      */
-    public function deletedir($path)
+    public function rmdir($path)
     {
         $deletedir = $this->execute('rmdir '.$this->remote.$path);
 
