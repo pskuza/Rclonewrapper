@@ -26,7 +26,7 @@ class RclonewrapperTest extends TestCase
      */
 	public function __construct()
 	{
-		$this->semi_random_folder_name = "test_" . mt_rand()
+		$this->semi_random_folder_name = "test_" . mt_rand();
 	}
 	
     /**
