@@ -101,8 +101,8 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * ls of remote:path.
      *
      * @param string $path
@@ -114,27 +114,27 @@ class Rclonewrapper
         $ls = $this->execute('ls '.$this->remote.$path);
 
         if (isset($ls) && !$ls[1]) {
-			//parse the output to an usable array
-			$list = array();
-			foreach($ls[0] as $ls_output) {
-				$ls_output = explode(" ", ltrim($ls_output), 2);
-				
-				//check if it's a dir
-				if(strpos($ls_output[1], '/') !== false) {
-					$dirname = substr($ls_output[1], 0, strrpos($ls_output[1], '/') + 1);
-					$list['/'][$dirname][] = array('name' => $ls_output[1], 'size' => $ls_output[0]);
-				} else {
-					$list['/'][] = array('name' => $ls_output[1], 'size' => $ls_output[0]);
-				}
-			}
-			
+            //parse the output to an usable array
+            $list = [];
+            foreach ($ls[0] as $ls_output) {
+                $ls_output = explode(' ', ltrim($ls_output), 2);
+
+                //check if it's a dir
+                if (strpos($ls_output[1], '/') !== false) {
+                    $dirname = substr($ls_output[1], 0, strrpos($ls_output[1], '/') + 1);
+                    $list['/'][$dirname][] = ['name' => $ls_output[1], 'size' => $ls_output[0]];
+                } else {
+                    $list['/'][] = ['name' => $ls_output[1], 'size' => $ls_output[0]];
+                }
+            }
+
             return $list;
         }
 
         return false;
     }
-	
-	/**
+
+    /**
      * lsl of remote:path.
      *
      * @param string $path
@@ -146,27 +146,27 @@ class Rclonewrapper
         $lsl = $this->execute('lsl '.$this->remote.$path);
 
         if (isset($lsl) && !$lsl[1]) {
-			//parse the output to an usable array
-			$list = array();
-			foreach($lsl[0] as $lsl_output) {
-				$lsl_output = explode(" ", ltrim($lsl_output), 4);
-				
-				//check if it's a dir
-				if(strpos($lsl_output[1], '/') !== false) {
-					$dirname = substr($lsl_output[1], 0, strrpos($lsl_output[1], '/') + 1);
-					$list['/'][$dirname][] = array('name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1] . ' ' . $lsl_output[2]);
-				} else {
-					$list['/'][] = array('name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1] . ' ' . $lsl_output[2]);
-				}
-			}
-			
+            //parse the output to an usable array
+            $list = [];
+            foreach ($lsl[0] as $lsl_output) {
+                $lsl_output = explode(' ', ltrim($lsl_output), 4);
+
+                //check if it's a dir
+                if (strpos($lsl_output[1], '/') !== false) {
+                    $dirname = substr($lsl_output[1], 0, strrpos($lsl_output[1], '/') + 1);
+                    $list['/'][$dirname][] = ['name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
+                } else {
+                    $list['/'][] = ['name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
+                }
+            }
+
             return $list;
         }
 
         return false;
     }
-	
-	/**
+
+    /**
      * lsd of remote:path.
      *
      * @param string $path
@@ -178,17 +178,17 @@ class Rclonewrapper
         $lsd = $this->execute('lsd '.$this->remote.$path);
 
         if (isset($lsd) && !$lsd[1]) {
-			//parse the output to an usable array
-			$list = array('/');
-			foreach($lsd[0] as $lsd_output) {
-				$lsd_output = substr($lsd_output, strpos($lsd_output, '-1'));
-				$lsd_output = explode(" ", ltrim($lsd_output), 2);
-				if(!empty($lsd_output[1])) {
-					$dirname = $lsd_output[1] . "/";
-					$list['/'][] = $dirname;
-				}
-			}
-			
+            //parse the output to an usable array
+            $list = ['/'];
+            foreach ($lsd[0] as $lsd_output) {
+                $lsd_output = substr($lsd_output, strpos($lsd_output, '-1'));
+                $lsd_output = explode(' ', ltrim($lsd_output), 2);
+                if (!empty($lsd_output[1])) {
+                    $dirname = $lsd_output[1].'/';
+                    $list['/'][] = $dirname;
+                }
+            }
+
             return $list;
         }
 
@@ -230,8 +230,8 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * Prints the total size and number of objects.
      *
      * @param string $path
@@ -243,10 +243,10 @@ class Rclonewrapper
         $size = $this->execute('size '.$this->remote.$path);
 
         if (isset($size) && !$size[1]) {
-			$count = abs((int) filter_var($size[0][0], FILTER_SANITIZE_NUMBER_INT));
+            $count = abs((int) filter_var($size[0][0], FILTER_SANITIZE_NUMBER_INT));
             preg_match_all('/\((\d+) Bytes\)/', $size[0][1], $matches);
-			
-			return ['count' => $count, 'size' => $matches[1][0]];
+
+            return ['count' => $count, 'size' => $matches[1][0]];
         }
 
         return false;
