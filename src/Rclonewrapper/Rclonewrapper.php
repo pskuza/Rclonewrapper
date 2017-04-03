@@ -82,11 +82,11 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * Copy a file to remote:path.
      *
-	 * @param string $source_path
+     * @param string $source_path
      * @param string $path
      *
      * @return bool
@@ -101,8 +101,8 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * Purge command.
      *
      * @param string $path
@@ -188,8 +188,8 @@ class Rclonewrapper
     protected function execute($command)
     {
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
-		
-		//do custom exceptions later
+
+        //do custom exceptions later
         // if ($returnValue !== 0) {
             // throw new \Exception(implode("\r\n", $output));
         // }
