@@ -24,13 +24,13 @@ class Rclonewrapper
      * @var string
      */
     private $config;
-	
-	/**
+
+    /**
      * The rclone remote path.
      *
      * @var string
      */
-    private $remote = NULL;
+    private $remote = null;
 
     /**
      * Class constructor.
@@ -43,31 +43,32 @@ class Rclonewrapper
         $this->rclone = $rclone;
         $this->config = $config;
     }
-	
-	/**
+
+    /**
      * Sets the remote.
-	 *
-	 * @param string $remote
+     *
+     * @param string $remote
      *
      * @return bool
      */
     public function setremote($remote)
     {
-        if(!empty($remote)) {	
-			// check if this remotes exists
-			if(in_array($remote, $this->listremotes())) {
-				$this->remote = $remote;
-				return true;
-			}
-		}
-		
+        if (!empty($remote)) {
+            // check if this remotes exists
+            if (in_array($remote, $this->listremotes())) {
+                $this->remote = $remote;
+
+                return true;
+            }
+        }
+
         return false;
     }
-	
-	/**
+
+    /**
      * Creates a dir.
-	 *
-	 * @param string $path
+     *
+     * @param string $path
      *
      * @return bool
      */
@@ -75,16 +76,17 @@ class Rclonewrapper
     {
         $createdir = $this->execute('mkdir '.$this->remote.$path);
 
-		if(isset($createdir[1]) && !$createdir[1]) {
-			return true;
-		}
-		return false;
+        if (isset($createdir[1]) && !$createdir[1]) {
+            return true;
+        }
+
+        return false;
     }
-	
-	/**
+
+    /**
      * Deletes a dir.
-	 *
-	 * @param string $path
+     *
+     * @param string $path
      *
      * @return bool
      */
@@ -92,13 +94,14 @@ class Rclonewrapper
     {
         $createdir = $this->execute('rmdir '.$this->remote.$path);
 
-		if(isset($createdir[1]) && !$createdir[1]) {
-			return true;
-		}
-		return false;
+        if (isset($createdir[1]) && !$createdir[1]) {
+            return true;
+        }
+
+        return false;
     }
-	
-	/**
+
+    /**
      * Cleanup a remote.
      *
      * @return bool
@@ -107,10 +110,11 @@ class Rclonewrapper
     {
         $cleanup = $this->execute('cleanup '.$this->remote);
 
-		if(isset($cleanup[1]) && !$cleanup[1]) {
-			return true;
-		}
-		return false;
+        if (isset($cleanup[1]) && !$cleanup[1]) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
