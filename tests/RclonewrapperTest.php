@@ -19,7 +19,16 @@ use Rclonewrapper\Rclonewrapper;
  */
 class RclonewrapperTest extends TestCase
 {
-	private $semi_random_folder_name = "test_" . mt_rand();
+	private $semi_random_folder_name;
+	
+	/**
+     * Init some semi random folders/files names.
+     */
+	public function __construct()
+	{
+		$this->semi_random_folder_name = "test_" . mt_rand()
+	}
+	
     /**
      * Tests if the version function works.
      */
