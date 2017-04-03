@@ -76,7 +76,44 @@ class Rclonewrapper
     {
         $createdir = $this->execute('mkdir '.$this->remote.$path);
 
-        if (isset($createdir[1]) && !$createdir[1]) {
+        if (isset($createdir) && !$createdir[1]) {
+            return true;
+        }
+
+        return false;
+    }
+	
+	/**
+     * Copy a file to remote:path.
+     *
+	 * @param string $source_path
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function copy($source_path, $path)
+    {
+        $copy = $this->execute('copy '.$source_path.' '.$this->remote.$path);
+
+        if (isset($copy) && !$copy[1]) {
+            return true;
+        }
+
+        return false;
+    }
+	
+	/**
+     * Purge command.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function purge($path)
+    {
+        $purge = $this->execute('purge '.$this->remote.$path);
+
+        if (isset($purge) && !$purge[1]) {
             return true;
         }
 
@@ -151,7 +188,8 @@ class Rclonewrapper
     protected function execute($command)
     {
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);
-
+		
+		//do custom exceptions later
         // if ($returnValue !== 0) {
             // throw new \Exception(implode("\r\n", $output));
         // }

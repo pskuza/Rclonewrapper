@@ -68,6 +68,18 @@ class RclonewrapperTest extends TestCase
         $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
 		$this->assertTrue($rclone->deletedir('/'.$this->semi_random_test_name));
     }
+	
+	/**
+     * Tests if copy and purge works.
+     */
+    public function testCreatedirandDeletedir()
+    {
+        $rclone = new Rclonewrapper('./rclone');
+        $rclone->setremote('DropboxTest:');
+		$this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
+        $this->assertTrue($rclone->copy('testfile.dat', '/'.$this->semi_random_test_name));
+		$this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
+    }
 
     /**
      * Tests if cleanup.
