@@ -45,6 +45,7 @@ class Rclonewrapper
     public function listremotes()
     {
         $listremotes = $this->execute('listremotes');
+
         return $listremotes[0];
     }
 
@@ -56,6 +57,7 @@ class Rclonewrapper
     public function version()
     {
         $version = $this->execute('version');
+
         return reset($version[0]);
     }
 
