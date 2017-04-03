@@ -9,7 +9,9 @@ php:
 before_install:
     - wget https://downloads.rclone.org/rclone-current-linux-amd64.zip
     - unzip rclone-current-linux-amd64.zip
+    - find . -name rclone | xargs cp -t .
     - ls -lR
+    - openssl aes-256-cbc -K $encrypted_ff94d2327762_key -iv $encrypted_ff94d2327762_iv -in rclone.conf.enc -out rclone.conf -d
 install:
     - composer install
 before_script:

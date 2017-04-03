@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-0": {
-            "rclone-wrapper": "src/"
+            "Rclonewrapper": "src/"
         }
     }
 }
