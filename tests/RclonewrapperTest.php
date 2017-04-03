@@ -55,7 +55,7 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $this->assertTrue($rclone->setremote('DropboxTest:'));
-		$this->assertFlase($rclone->setremote('Nosuchremote:'));
+		$this->assertFalse($rclone->setremote('Nosuchremote:'));
     }
 
     /**

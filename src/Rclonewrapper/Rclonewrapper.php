@@ -110,7 +110,7 @@ class Rclonewrapper
     {
         $cleanup = $this->execute('cleanup '.$this->remote);
 
-        if (isset($cleanup[1]) && !$cleanup[1]) {
+        if (isset($cleanup) && !$cleanup[1]) {
             return true;
         }
 
