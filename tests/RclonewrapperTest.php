@@ -26,7 +26,7 @@ class RclonewrapperTest extends TestCase
      */
 	public function __construct()
 	{
-		$this->semi_random_folder_name = "test_" . mt_rand();
+		$this->semi_random_test_name = "test_" . mt_rand();
 	}
 	
     /**
@@ -60,21 +60,12 @@ class RclonewrapperTest extends TestCase
     /**
      * Tests if createdir works.
      */
-    public function testCreatedir()
+    public function testCreatedirandDeletedir()
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->createdir('/'.$this->semi_random_folder_name));
-    }
-
-    /**
-     * Tests if deletedir works.
-     */
-    public function testDeletedir()
-    {
-        $rclone = new Rclonewrapper('./rclone');
-        $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->deletedir('/'.$this->semi_random_folder_name));
+        $this->assertTrue($rclone->createdir('/'.$this->semi_random_test_name));
+		$this->assertTrue($rclone->deletedir('/'.$this->semi_random_test_name));
     }
 
     /**

@@ -92,9 +92,9 @@ class Rclonewrapper
      */
     public function deletedir($path)
     {
-        $createdir = $this->execute('rmdir '.$this->remote.$path);
+        $deletedir = $this->execute('rmdir '.$this->remote.$path);
 
-        if (isset($createdir[1]) && !$createdir[1]) {
+        if (isset($deletedir) && !$deletedir[1]) {
             return true;
         }
 
