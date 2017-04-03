@@ -19,6 +19,7 @@ use Rclonewrapper\Rclonewrapper;
  */
 class RclonewrapperTest extends TestCase
 {
+	private $semi_random_folder_name = "test_" . mt_rand();
     /**
      * Tests if the version function works.
      */
@@ -54,7 +55,7 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->createdir('/test'));
+        $this->assertTrue($rclone->createdir('/'.$this->semi_random_folder_name));
     }
 
     /**
@@ -64,7 +65,7 @@ class RclonewrapperTest extends TestCase
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
-        $this->assertTrue($rclone->deletedir('/test'));
+        $this->assertTrue($rclone->deletedir('/'.$this->semi_random_folder_name));
     }
 
     /**
