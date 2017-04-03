@@ -72,7 +72,7 @@ class RclonewrapperTest extends TestCase
 	/**
      * Tests if copy and purge works.
      */
-    public function testCreatedirandDeletedir()
+    public function testCreatedirandCopyandPurge()
     {
         $rclone = new Rclonewrapper('./rclone');
         $rclone->setremote('DropboxTest:');
