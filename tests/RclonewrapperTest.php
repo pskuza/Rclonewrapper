@@ -22,11 +22,11 @@ class RclonewrapperTest extends TestCase
     private $semi_random_folder_name;
 
     /**
-     * Init some semi random folders/files names.
+     * Init some random folder/file names.
      */
     public function __construct()
     {
-        $this->semi_random_test_name = 'test_'.mt_rand();
+        $this->semi_random_test_name = 'test_'.bin2hex(random_bytes(8));
     }
 
     /**
@@ -91,6 +91,22 @@ class RclonewrapperTest extends TestCase
         $this->assertTrue($rclone->mkdir('/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->copy('testdir', '/'.$this->semi_random_test_name));
         $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
+    }
+	
+	/**
+     * Tests if ls, lsd, lsl, size.
+     */
+    public function testallthelsandsize()
+    {
+        // $rclone = new Rclonewrapper('./rclone');
+        // $rclone->setremote('DropboxTest:');
+        // $this->assertTrue($rclone->mkdir('/'.$this->semi_random_test_name));
+        // $this->assertTrue($rclone->copy('testdir', '/'.$this->semi_random_test_name));
+        // $this->assertTrue($rclone->purge('/'.$this->semi_random_test_name));
+		
+		// var_dump($rclone->size($this->semi_random_test_name));
+		
+		
     }
 
     /**
