@@ -101,6 +101,82 @@ class Rclonewrapper
 
         return false;
     }
+	
+	/**
+     * md5sum of remote:path.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function md5sum($path)
+    {
+        $md5sum = $this->execute('md5sum '.$this->remote.$path);
+
+        if (isset($md5sum) && !$md5sum[1]) {
+            //parse the output to an usable array
+            $list = [];
+            foreach ($md5sum[0] as $md5sum_output) {
+                $md5sum_output = explode(' ', ltrim($md5sum_output), 2);
+
+                //check if supported
+                if ($md5sum_output[0] === "UNSUPPORTED") {
+					//remote does not support md5sum
+                    return false;
+                } else {
+                    if (strpos($md5sum_output[1], '/') !== false) {
+						$dirname = substr($md5sum_output[1], 0, strrpos($md5sum_output[1], '/') + 1);
+						$filename = mb_substr($md5sum_output[1], mb_strlen($dirname));
+						$list['/'][$dirname][] = ['name' => $filename, 'md5' => $md5sum_output[0]];
+					} else {
+						$list['/'][] = ['name' => $md5sum_output[1], 'md5' => $md5sum_output[0]];
+					}
+                }
+            }
+
+            return $list;
+        }
+
+        return false;
+    }
+	
+	/**
+     * sha1sum of remote:path.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function sha1sum($path)
+    {
+        $sha1sum = $this->execute('sha1sum '.$this->remote.$path);
+
+        if (isset($sha1sum) && !$sha1sum[1]) {
+            //parse the output to an usable array
+            $list = [];
+            foreach ($sha1sum[0] as $sha1sum_output) {
+                $sha1sum_output = explode(' ', ltrim($sha1sum_output), 2);
+
+                //check if supported
+                if ($sha1sum_output[0] === "UNSUPPORTED") {
+					//remote does not support md5sum
+                    return false;
+                } else {
+                    if (strpos($sha1sum_output[1], '/') !== false) {
+						$dirname = substr($sha1sum_output[1], 0, strrpos($sha1sum_output[1], '/') + 1);
+						$filename = mb_substr($sha1sum_output[1], mb_strlen($dirname));
+						$list['/'][$dirname][] = ['name' => $filename, 'md5' => $sha1sum_output[0]];
+					} else {
+						$list['/'][] = ['name' => $sha1sum_output[1], 'md5' => $sha1sum_output[0]];
+					}
+                }
+            }
+
+            return $list;
+        }
+
+        return false;
+    }
 
     /**
      * ls of remote:path.
@@ -122,7 +198,8 @@ class Rclonewrapper
                 //check if it's a dir
                 if (strpos($ls_output[1], '/') !== false) {
                     $dirname = substr($ls_output[1], 0, strrpos($ls_output[1], '/') + 1);
-                    $list['/'][$dirname][] = ['name' => $ls_output[1], 'size' => $ls_output[0]];
+					$filename = mb_substr($ls_output[1], mb_strlen($dirname));
+                    $list['/'][$dirname][] = ['name' => $filename, 'size' => $ls_output[0]];
                 } else {
                     $list['/'][] = ['name' => $ls_output[1], 'size' => $ls_output[0]];
                 }
@@ -152,9 +229,10 @@ class Rclonewrapper
                 $lsl_output = explode(' ', ltrim($lsl_output), 4);
 
                 //check if it's a dir
-                if (strpos($lsl_output[1], '/') !== false) {
-                    $dirname = substr($lsl_output[1], 0, strrpos($lsl_output[1], '/') + 1);
-                    $list['/'][$dirname][] = ['name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
+                if (strpos($lsl_output[3], '/') !== false) {
+                    $dirname = substr($lsl_output[3], 0, strrpos($lsl_output[3], '/') + 1);
+					$filename = mb_substr($lsl_output[3], mb_strlen($dirname));
+                    $list['/'][$dirname][] = ['name' => $filename, 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
                 } else {
                     $list['/'][] = ['name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
                 }
@@ -179,7 +257,7 @@ class Rclonewrapper
 
         if (isset($lsd) && !$lsd[1]) {
             //parse the output to an usable array
-            $list = ['/'];
+            $list = [];
             foreach ($lsd[0] as $lsd_output) {
                 $lsd_output = substr($lsd_output, strpos($lsd_output, '-1'));
                 $lsd_output = explode(' ', ltrim($lsd_output), 2);

@@ -75,6 +75,16 @@ var_dump($rclone->lsd('/test'));
 // array you will see how it looks
 // https://rclone.org/commands/rclone_lsd/
 
+# md5sum of file or path
+var_dump($rclone->md5sum('/test.file'));
+// array you will see how it looks, false on failure
+// https://rclone.org/commands/rclone_md5sum/
+
+# sha1sum of file or path
+var_dump($rclone->sha1sum('/testdir'));
+// array you will see how it looks, false on failure
+// https://rclone.org/commands/rclone_sha1sum/
+
 # delete a directory with files
 var_dump($rclone->purge('/test'));
 // bool (true) on success, false on failure
