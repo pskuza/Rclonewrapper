@@ -101,8 +101,8 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * md5sum of remote:path.
      *
      * @param string $path
@@ -120,17 +120,17 @@ class Rclonewrapper
                 $md5sum_output = explode(' ', ltrim($md5sum_output), 2);
 
                 //check if supported
-                if ($md5sum_output[0] === "UNSUPPORTED") {
-					//remote does not support md5sum
+                if ($md5sum_output[0] === 'UNSUPPORTED') {
+                    //remote does not support md5sum
                     return false;
                 } else {
                     if (strpos($md5sum_output[1], '/') !== false) {
-						$dirname = substr($md5sum_output[1], 0, strrpos($md5sum_output[1], '/') + 1);
-						$filename = mb_substr($md5sum_output[1], mb_strlen($dirname));
-						$list['/'][$dirname][] = ['name' => $filename, 'md5' => $md5sum_output[0]];
-					} else {
-						$list['/'][] = ['name' => $md5sum_output[1], 'md5' => $md5sum_output[0]];
-					}
+                        $dirname = substr($md5sum_output[1], 0, strrpos($md5sum_output[1], '/') + 1);
+                        $filename = mb_substr($md5sum_output[1], mb_strlen($dirname));
+                        $list['/'][$dirname][] = ['name' => $filename, 'md5' => $md5sum_output[0]];
+                    } else {
+                        $list['/'][] = ['name' => $md5sum_output[1], 'md5' => $md5sum_output[0]];
+                    }
                 }
             }
 
@@ -139,8 +139,8 @@ class Rclonewrapper
 
         return false;
     }
-	
-	/**
+
+    /**
      * sha1sum of remote:path.
      *
      * @param string $path
@@ -158,17 +158,17 @@ class Rclonewrapper
                 $sha1sum_output = explode(' ', ltrim($sha1sum_output), 2);
 
                 //check if supported
-                if ($sha1sum_output[0] === "UNSUPPORTED") {
-					//remote does not support md5sum
+                if ($sha1sum_output[0] === 'UNSUPPORTED') {
+                    //remote does not support md5sum
                     return false;
                 } else {
                     if (strpos($sha1sum_output[1], '/') !== false) {
-						$dirname = substr($sha1sum_output[1], 0, strrpos($sha1sum_output[1], '/') + 1);
-						$filename = mb_substr($sha1sum_output[1], mb_strlen($dirname));
-						$list['/'][$dirname][] = ['name' => $filename, 'md5' => $sha1sum_output[0]];
-					} else {
-						$list['/'][] = ['name' => $sha1sum_output[1], 'md5' => $sha1sum_output[0]];
-					}
+                        $dirname = substr($sha1sum_output[1], 0, strrpos($sha1sum_output[1], '/') + 1);
+                        $filename = mb_substr($sha1sum_output[1], mb_strlen($dirname));
+                        $list['/'][$dirname][] = ['name' => $filename, 'md5' => $sha1sum_output[0]];
+                    } else {
+                        $list['/'][] = ['name' => $sha1sum_output[1], 'md5' => $sha1sum_output[0]];
+                    }
                 }
             }
 
@@ -198,7 +198,7 @@ class Rclonewrapper
                 //check if it's a dir
                 if (strpos($ls_output[1], '/') !== false) {
                     $dirname = substr($ls_output[1], 0, strrpos($ls_output[1], '/') + 1);
-					$filename = mb_substr($ls_output[1], mb_strlen($dirname));
+                    $filename = mb_substr($ls_output[1], mb_strlen($dirname));
                     $list['/'][$dirname][] = ['name' => $filename, 'size' => $ls_output[0]];
                 } else {
                     $list['/'][] = ['name' => $ls_output[1], 'size' => $ls_output[0]];
@@ -231,7 +231,7 @@ class Rclonewrapper
                 //check if it's a dir
                 if (strpos($lsl_output[3], '/') !== false) {
                     $dirname = substr($lsl_output[3], 0, strrpos($lsl_output[3], '/') + 1);
-					$filename = mb_substr($lsl_output[3], mb_strlen($dirname));
+                    $filename = mb_substr($lsl_output[3], mb_strlen($dirname));
                     $list['/'][$dirname][] = ['name' => $filename, 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
                 } else {
                     $list['/'][] = ['name' => $lsl_output[3], 'size' => $lsl_output[0], 'time' => $lsl_output[1].' '.$lsl_output[2]];
