@@ -1,5 +1,5 @@
 {
-    "name": "cr0nixx/rclonewrapper",
+    "name": "pskuza/rclonewrapper",
     "type": "Library",
     "description": "Simple wrapper to use rclone in your PHP projects.",
     "keywords": ["rclone"],
