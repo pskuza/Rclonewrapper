@@ -4,7 +4,7 @@ Simple wrapper to use [rclone](https://rclone.org) in your PHP projects.
 ## Install
 
 ``` sh
-php composer.phar require "cr0nixx/rclonewrapper"
+php composer.phar require "pskuza/rclonewrapper"
 ```
 
 You need a valid rclone.conf
