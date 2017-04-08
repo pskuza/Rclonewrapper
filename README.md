@@ -1,4 +1,4 @@
-# Rclonewrapper [![Build Status](https://travis-ci.org/pskuza/Rclonewrapper.svg?branch=master)](https://travis-ci.org/Cr0nixx/Rclonewrapper)
+# Rclonewrapper [![Build Status](https://travis-ci.org/pskuza/Rclonewrapper.svg?branch=master)](https://travis-ci.org/pskuza/Rclonewrapper)
 Simple wrapper to use [rclone](https://rclone.org) in your PHP projects.
 
 ## Install
