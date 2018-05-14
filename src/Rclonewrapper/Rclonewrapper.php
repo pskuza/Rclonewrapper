@@ -103,6 +103,25 @@ class Rclonewrapper
     }
 
     /**
+     * Copy a file(s) or directory
+     *
+     * @param string $source_path
+     * @param string $dest_path
+     *
+     * @return bool
+     */
+    public function copyto($source_path, $dest_path)
+    {
+        $copyto = $this->execute('copyto '.$source_path.' '.$dest_path);
+
+        if (isset($copyto) && !$copyto[1]) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * md5sum of remote:path.
      *
      * @param string $path
