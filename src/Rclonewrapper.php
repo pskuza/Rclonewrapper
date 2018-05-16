@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Copyright (c) Philip Skuza <philip.skuza@gmail.com>
  *
@@ -7,50 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Rclonewrapper;
+namespace pskuza;
 
 class Rclonewrapper
 {
-    /**
-     * The rclone binary location.
-     *
-     * @var string
-     */
-    private $rclone;
 
-    /**
-     * The rclone config location.
-     *
-     * @var string
-     */
-    private $config;
-
-    /**
-     * The rclone remote path.
-     *
-     * @var string
-     */
+    protected $rclone;
+    protected $config;
     private $remote = null;
 
-    /**
-     * Class constructor.
-     *
-     * @param string $rclone
-     * @param string $config
-     */
     public function __construct($rclone, $config = 'rclone.conf')
     {
+
         $this->rclone = $rclone;
         $this->config = $config;
     }
 
-    /**
-     * Sets the remote.
-     *
-     * @param string $remote
-     *
-     * @return bool
-     */
     public function setremote($remote)
     {
         if (!empty($remote)) {
@@ -65,13 +39,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Creates a dir.
-     *
-     * @param string $path
-     *
-     * @return bool
-     */
+
     public function mkdir($path)
     {
         $createdir = $this->execute('mkdir '.$this->remote.$path);
@@ -83,14 +51,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Copy a file to remote:path.
-     *
-     * @param string $source_path
-     * @param string $path
-     *
-     * @return bool
-     */
+
     public function copy($source_path, $path)
     {
         $copy = $this->execute('copy '.$source_path.' '.$this->remote.$path);
@@ -102,14 +63,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Copy a file(s) or directory
-     *
-     * @param string $source_path
-     * @param string $dest_path
-     *
-     * @return bool
-     */
+
     public function copyto($source_path, $dest_path)
     {
         $copyto = $this->execute('copyto '.$source_path.' '.$dest_path);
@@ -121,13 +75,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * md5sum of remote:path.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
+
     public function md5sum($path)
     {
         $md5sum = $this->execute('md5sum '.$this->remote.$path);
@@ -159,13 +107,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * sha1sum of remote:path.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
     public function sha1sum($path)
     {
         $sha1sum = $this->execute('sha1sum '.$this->remote.$path);
@@ -197,13 +138,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * ls of remote:path.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
     public function ls($path)
     {
         $ls = $this->execute('ls '.$this->remote.$path);
@@ -230,13 +164,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * lsl of remote:path.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
     public function lsl($path)
     {
         $lsl = $this->execute('lsl '.$this->remote.$path);
@@ -263,13 +190,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * lsd of remote:path.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
     public function lsd($path)
     {
         $lsd = $this->execute('lsd '.$this->remote.$path);
@@ -292,13 +212,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Purge command.
-     *
-     * @param string $path
-     *
-     * @return bool
-     */
     public function purge($path)
     {
         $purge = $this->execute('purge '.$this->remote.$path);
@@ -310,13 +223,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Deletes a dir.
-     *
-     * @param string $path
-     *
-     * @return bool
-     */
     public function rmdir($path)
     {
         $deletedir = $this->execute('rmdir '.$this->remote.$path);
@@ -328,13 +234,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Prints the total size and number of objects.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
+
     public function size($path)
     {
         $size = $this->execute('size '.$this->remote.$path);
@@ -349,11 +249,7 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Cleanup a remote.
-     *
-     * @return bool
-     */
+
     public function cleanup()
     {
         $cleanup = $this->execute('cleanup '.$this->remote);
@@ -365,11 +261,6 @@ class Rclonewrapper
         return false;
     }
 
-    /**
-     * Lists all remotes in the config.
-     *
-     * @return array
-     */
     public function listremotes()
     {
         $listremotes = $this->execute('listremotes');
@@ -377,11 +268,6 @@ class Rclonewrapper
         return $listremotes[0];
     }
 
-    /**
-     * Returns rclone version.
-     *
-     * @return string
-     */
     public function version()
     {
         $version = $this->execute('version');
@@ -389,13 +275,6 @@ class Rclonewrapper
         return reset($version[0]);
     }
 
-    /**
-     * @param string $command
-     *
-     * @throws RuntimeException
-     *
-     * @return array
-     */
     protected function execute($command)
     {
         exec($this->rclone.' --config '.$this->config.' '.$command, $output, $returnValue);

@@ -1,5 +1,5 @@
 {
-    "name": "pskuza/rclonewrapper",
+    "name": "pskuza/Rclonewrapper",
     "type": "Library",
     "description": "Simple wrapper to use rclone in your PHP projects.",
     "keywords": ["rclone"],
@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "php": "^7"
+        "php": "^7",
+        "pastuhov/php-exec-command": "^1.1"
     },
     "require-dev": {
         "sllh/composer-versions-check": "^2.0",
@@ -19,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "pskuza\\rclonewrapper": "src/"
+            "pskuza\\Rclonewrapper": "src/"
         }
     }
 }
